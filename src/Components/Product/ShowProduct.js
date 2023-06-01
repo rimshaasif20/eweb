@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react';
 import Card from 'react-bootstrap/Card';
 import { useParams } from 'react-router-dom';
 import Products from '../../Data';
@@ -10,13 +10,15 @@ function ShowProduct() {
     const dispatch=useDispatch();
     const navigate= useNavigate();
     const { id } = useParams();
+    const [quantity, setQuantity] = useState(1);
+
     console.log('product id',id);
     const product = Products.filter((p)=>p.id == id)
     console.log('product object =',product[0])
 
     function addtoCart(){
   
-    dispatch(addToCart(product[0]))
+    dispatch(addToCart(product[0]),quantity)
  navigate('/services');
     }
   return (
@@ -34,16 +36,18 @@ function ShowProduct() {
           {product[0].price}
         </Card.Text>
         <Card.Text>
-        <div class="form-group">
-      <label for="exampleSelect2" class="form-label mt-4"> Select</label>
-      <select multiple="" class="form-select" id="exampleSelect2">
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-        <option>5</option>
-      </select>
-    </div>
+        <Card.Text>
+            <div className="form-group">
+              <label htmlFor="exampleSelect2" className="form-label mt-4">Quantity</label>
+              <input
+                type="number"
+                className="form-control"
+                min="1"
+                value={quantity}
+                onChange={(e) => setQuantity(parseInt(e.target.value))}
+              />
+            </div>
+          </Card.Text>
     </Card.Text>
         <button type="button" className="btn btn-primary" style={{width: '30%', marginLeft: '100px' }} onClick={() =>{addtoCart()}}>Add To Cart</button>
       </Card.Body>
