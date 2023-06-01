@@ -1,16 +1,18 @@
 
-import { createStore, combineReducers } from 'redux';
-import Reducer from './Reducer';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import UseReducer from './UseReducer';
 import { composeWithDevTools } from 'redux-devtools-extension';
-
+import thunkMiddleware from 'redux-thunk'
 // store main reducers sy pass hony wala data save krna
 const rootReducer = combineReducers({
-  Data: Reducer,
+ ProductItems: UseReducer,
+ cartItems: UseReducer
+
 });
 
 const store = createStore(
   rootReducer,
-  composeWithDevTools() 
+  composeWithDevTools(applyMiddleware(thunkMiddleware)) 
   );
 
 export default store;

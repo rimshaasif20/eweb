@@ -1,23 +1,45 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import './Product.css'
 import Card from 'react-bootstrap/Card';
-function Product({Products}) {
-   
+
+import {useSelector, useDispatch} from 'react-redux'
+import {fetchDummyData } from '../../Redux/Actions';
+import {  useNavigate } from 'react-router-dom';
+function Product() {
+  const navigate= useNavigate();
+  const dispatch=useDispatch();
+  
+  // debugger;
+   const ProductItems=useSelector((state)=> state.ProductItems)
+  const  Products= ProductItems.Products;
+
+   useEffect(()=>{
+dispatch(fetchDummyData())
+   },[])
+
+   const handleCardClick = (product) => {
+    navigate (`/list/${product.id}`, { product });
+  };
+  
   return (
     <>
   <div className='container'>
-    <Card  style={{ width: '18rem' }}>
-      <Card.Img variant="top" src="holder.js/100px180" />
-      <Card.Body>
-        <Card.Title>{Products.name}</Card.Title>
+  {Products?.map((data)=>(
+    <Card  style={{ width: '18rem' }} key={data.id} onClick={() => handleCardClick(data)}>
+      <Card.Img variant="top" src={data.image} />
+      <Card.Body style={{color: 'black'}}>
+        <Card.Title>{data.name}</Card.Title>
         <Card.Text>
-          {Products.description}
+          {data.description}
         </Card.Text>
         <Card.Text>
-          {Products.price}
+          {data.price}
         </Card.Text>
       </Card.Body>
     </Card>
+    ))
+  }
+ 
     </div>
     </>
   )

@@ -6,8 +6,8 @@ import '../App.css'
 function Navigate() {
   return (
     <>
-    <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
-    <a className="navbar-brand" to="/">BestBuy</a>   
+    <nav className="navbar navbar-expand-lg navbar-dark bg-primary" style={{marginLeft: '3%'}}>
+    <a className="navbar-brand" style={{marginLeft: '5px' , padding: '2px', fontSize: '40px', fontWeight: 'Bold'}} to="/">BestBuy</a>   
     <div className="collapse navbar-collapse" id="navbarColor01">
       <ul className="navbar-nav me-auto">
         <li className="nav-item">
@@ -24,10 +24,14 @@ function Navigate() {
         </li>
         <li className="nav-item">
         <Nav.Link>
-          <NavLink class="nav-link" to="/services">Services</NavLink>
+          <NavLink className="nav-link" to="/services">Services</NavLink>
        </Nav.Link>
         </li>
       </ul>
+      <form className="d-flex">
+        <input className="form-control me-sm-2" style={{backgroundColor: 'white'}} type="search" placeholder="Search" />
+        <button className="btn btn-secondary my-2 my-sm-0" style={{marginRight: '13px'}} type="submit">Search</button>
+      </form>
   </div>
 </nav>
       </>
