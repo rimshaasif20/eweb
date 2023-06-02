@@ -25,14 +25,18 @@ const initialState = {
           error: action.payload
         };
         case ADD_TO_CART:
+          // const { product, quantity } = action.payload;
+          // const item = { ...product, quantity };
           return {
-            ...state,
-            cartItems: [...state.cartItems, action.payload],
-          };
+          ...state,
+          cartItems: [...state.cartItems, action.payload]
+          }
+          
           case REMOVE_FROM_CART:
+            debugger;
             return {
               ...state,
-              cartItems: state.cartItems.filter(item => item.id !== action.payload)
+              cartItems: state.cartItems.filter(item => item.id != action.payload)
             };
       default:
         return state;

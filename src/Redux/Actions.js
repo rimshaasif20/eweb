@@ -6,7 +6,6 @@ export const ADD_TO_CART = 'ADD_TO_CART';
 export const  REMOVE_FROM_CART= 'REMOVE_FROM_CART';
 
 export const fetchDummyData = () =>  (dispatch) => {
-  // debugger;
     try {
       dispatch({ 
         type: FETCH_DATA_SUCCESS, 
@@ -15,20 +14,37 @@ export const fetchDummyData = () =>  (dispatch) => {
    localStorage.setItems('Products', JSON.stringify(Products) )
 
     } catch (error) {
-      // Handle error if any
       dispatch({ 
         type: FETCH_DATA_FAILURE,
        payload: error.message 
     });
     }
   };
-  export const addToCart = (item) => {
-    return {
-      type: ADD_TO_CART,
-      payload: item,
-    };
-  };
+  export const addToCart = (product, quantity) =>(dispatch)=> {
+  
+  try {
+    dispatch({
+    type: ADD_TO_CART,
+    payload: {
+     product: product.id,
+     name: product.name,
+     image: product.image,
+     price: product.price,
+     quantity: Number(quantity),
+    }
+    })
+   // localStorage.setItems('CartItems', JSON.stringify(cartItems) );
+  }
+  catch (error) {
+    dispatch({ 
+      type: FETCH_DATA_FAILURE,
+     payload: error.message 
+  });
+  }
+  }
+
   export const removeFromCart = (productId) => {
+    debugger;
     return {
       type: 'REMOVE_FROM_CART',
       payload: productId

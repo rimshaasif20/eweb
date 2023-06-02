@@ -2,6 +2,7 @@ import React from 'react'
 import Nav from 'react-bootstrap/Nav';
 import { NavLink } from 'react-router-dom'
 import '../App.css'
+import CartButton from '../Components/Product/CartButton';
 
 function Navigate() {
   return (
@@ -28,7 +29,10 @@ function Navigate() {
        </Nav.Link>
         </li>
       </ul>
-      <form className="d-flex">
+      <form className="d-flex"> 
+      <CartButton>
+     <button type="button" className="btn btn-info"   style={{marginRight: '20px'}}>Cart</button>
+     </CartButton>
         <input className="form-control me-sm-2" style={{backgroundColor: 'white'}} type="search" placeholder="Search" />
         <button className="btn btn-secondary my-2 my-sm-0" style={{marginRight: '13px'}} type="submit">Search</button>
       </form>

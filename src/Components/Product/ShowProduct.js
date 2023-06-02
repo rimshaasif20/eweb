@@ -5,21 +5,24 @@ import Products from '../../Data';
 import {  useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../../Redux/Actions';
+import Cart from './Cart';
 function ShowProduct() {
     // const { product } = props;
     const dispatch=useDispatch();
     const navigate= useNavigate();
-    const { id } = useParams();
     const [quantity, setQuantity] = useState(1);
+    
+    const { id } = useParams();
 
     console.log('product id',id);
     const product = Products.filter((p)=>p.id == id)
     console.log('product object =',product[0])
 
     function addtoCart(){
-  
-    dispatch(addToCart(product[0]),quantity)
- navigate('/services');
+  debugger;
+    dispatch(addToCart(product[0], quantity))
+    console.log(product[0],quantity);
+   // navigate (`/services/${product.id}${quantity}`);
     }
   return (
     <>
@@ -44,12 +47,13 @@ function ShowProduct() {
                 className="form-control"
                 min="1"
                 value={quantity}
-                onChange={(e) => setQuantity(parseInt(e.target.value))}
+                onChange={(e) => setQuantity(Number(e.target.value))}
               />
             </div>
+            <button type="button" className="btn btn-primary" style={{width: '30%', marginLeft: '100px' }} onClick={() =>{addtoCart()}}>Add To Cart</button>
           </Card.Text>
     </Card.Text>
-        <button type="button" className="btn btn-primary" style={{width: '30%', marginLeft: '100px' }} onClick={() =>{addtoCart()}}>Add To Cart</button>
+       
       </Card.Body>
     </Card>
   </div>
