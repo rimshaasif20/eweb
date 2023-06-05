@@ -1,7 +1,8 @@
 import React, {useEffect} from 'react'
 import './Product.css'
 import Card from 'react-bootstrap/Card';
-
+// import Products from '../Data';
+import Products from '../../Data';
 import {useSelector, useDispatch} from 'react-redux'
 import {fetchDummyData } from '../../Redux/Actions';
 import {  useNavigate } from 'react-router-dom';
@@ -10,11 +11,13 @@ function Product() {
   const dispatch=useDispatch();
   
   // debugger;
-   const ProductItems=useSelector((state)=> state.ProductItems)
-  const  Products= ProductItems.Products;
+  //  const ProductItems=useSelector((state)=> state.ProductItems)
+  // const  Products= ProductItems.Products;
 
+  const productsFromLocalStorage = JSON.parse(localStorage.getItem("listOfProducts"))
+debugger
    useEffect(()=>{
-dispatch(fetchDummyData())
+dispatch(fetchDummyData(Products))
    },[])
 
    const handleCardClick = (product) => {
@@ -24,7 +27,7 @@ dispatch(fetchDummyData())
   return (
     <>
   <div className='container'>
-  {Products?.map((data)=>(
+  {productsFromLocalStorage?.map((data)=>(
     <Card  style={{ width: '18rem' }} key={data.id} onClick={() => handleCardClick(data)}>
       <Card.Img variant="top" src={data.image} />
       <Card.Body style={{color: 'black'}}>

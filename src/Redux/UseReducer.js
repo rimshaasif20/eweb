@@ -13,10 +13,10 @@ const initialState = {
    
     switch (action.type) {
       case FETCH_DATA_SUCCESS:
-        // debugger;
+        debugger;
         return {
           ...state,
-          loading: false,
+          
           Products: action.payload
         };
       case FETCH_DATA_FAILURE:
