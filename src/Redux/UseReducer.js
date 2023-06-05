@@ -1,8 +1,9 @@
-import{FETCH_DATA_SUCCESS, FETCH_DATA_FAILURE,ADD_TO_CART,REMOVE_FROM_CART } from './Actions'
+import{FETCH_DATA_SUCCESS, FETCH_DATA_FAILURE,ADD_TO_CART,REMOVE_FROM_CART,ADD_USER } from './Actions'
 
 const initialState = {
     Products: [],
     cartItems: [],
+    users: [],
     loading: false,
     error: null
   };
@@ -36,8 +37,17 @@ const initialState = {
             debugger;
             return {
               ...state,
-              cartItems: state.cartItems.filter(item => item.id != action.payload)
+              cartItems: state.cartItems.filter(item => item.product != action.payload)
             };
+
+              case ADD_USER:
+                debugger;
+                return {
+                  
+                  ...state,
+                  users: [...state.users, action.payload],
+                  cartItems: []
+                };
       default:
         return state;
     }

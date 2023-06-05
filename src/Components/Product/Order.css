@@ -13,3 +13,44 @@
   .btn{
         padding: 2px;
 } */
+.container {
+   margin: 20px;
+ }
+ 
+ table {
+   width: 100%;
+   border-collapse: collapse;
+   background-color: goldenrod;
+   border: 1px solid black;
+ }
+ 
+  td {
+   padding: 10px;
+   border: 1px solid black;
+   color: black;
+ }
+ 
+ th {
+   color: black;
+   font-weight: bold;
+   text-align: left;
+   background-color: #f9f9f9;
+ }
+ 
+ 
+ tbody tr:hover {
+   background-color: #e5e5e5;
+   cursor: pointer;
+ }
+ 
+ img {
+   width: 50px;
+   height: 50px;
+   transition: transform 0.3s ease;
+   
+ }
+ img:hover  {
+   transform: scale(1.2);
+ }
+
+ 

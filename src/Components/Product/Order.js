@@ -1,11 +1,10 @@
 
-import React, { useState } from 'react';
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { addToCart } from '../../Redux/Actions';
-import {useSelector } from 'react-redux';
 import './Order.css'
-
+import {  useSelector, useDispatch } from "react-redux";
+import { addUsers } from "../../Redux/Actions";
+import { useNavigate } from "react-router";
 
 const validation = Yup.object().shape({
     email: Yup.string().email("Invalid email").required("Email is required"),
@@ -14,12 +13,10 @@ const validation = Yup.object().shape({
   });
 
 function Order() {
-    const [data, setData] = useState([]);
-    const cartItems = useSelector((state) => state.cartItems.cartItems);
-   // const cartItems= cart.cartItems;
-    debugger;
-
-    console.log(cartItems);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const cartItems=useSelector((state)=>state.cartItems.cartItems);
+    var order={};
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -28,16 +25,23 @@ function Order() {
     },
     validationSchema: validation, 
     onSubmit: (values, { resetForm }) => {
+      console.log('form valusesssss', values)
      // alert(JSON.stringify(values, null, 2));
-      console.log(values);
-      const newData = [...data, values];
-     
-    setData(newData);
+     order=values;
+     order.products = cartItems;
+     console.log("Form ORDER = ", order)
+     if (cartItems.length > 0) {
+      dispatch(addUsers(order));
+      navigate('/products');
+    } else {
+      console.log("Cart items are not present in the table");
+      alert('cartItems is not present')
+    }
     resetForm();
+
     },
   });
  
-
   return (
     <>
       <div className="container">
@@ -91,36 +95,28 @@ function Order() {
             </div>
           </fieldset>
         </form>
-      </div>
-      <div className="container">
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th scope="col">Email Name</th>
-              <th scope="col">Phone</th>
-              <th scope="col">City</th>
-              <th scope="col"> Product Details</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data.map((user, index) => (
-              <tr class="table-info" key={index}>
-                <td>{user.email}</td>
-                <td>{user.number}</td>
-                <td>{user.city}</td>
-                <td>{
-                   cartItems.map((item, index) => (
-                <tr key={index}>               
-                  <ul>
-                  <li>{item.name}{' |  '}{item.price}{'  | '}{item.quantity}{' | '} <img src={item.image} style={{width: '50px', height: '50px'}}/></li>
-                  </ul>
-                  </tr>
-                   ))}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <div className="container" >
+    <table class="table table-hover">
+      <thead >
+        <tr >
+          <th scope="col">Name</th>
+          <th scope="col">Price</th>
+          <th scope="col">Quantity</th>
+          <th scope="col">Image</th>
+        </tr>
+      </thead>
+      <tbody  >
+        {cartItems.map((item, index) => (
+          <tr key={index}>
+            <td>{item.name}</td>
+            <td>{item.price}</td>
+            <td>{item.quantity}</td>
+            <td> <img src={item.image} alt={'image'}  style={{width: '50px', height: '50px'}}/></td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
       </div>
     </>
   );

@@ -31,6 +31,7 @@ function ShowProduct() {
     <Card.Img variant="top" src={product[0].image} style={{width: '50%', height: '30%', objectFit:'cover' }} />
     <Card  style={{ width: '30rem' , margin: '90px'}}>
       <Card.Body style={{color: 'black'}}>
+      <Card.Title>{product[0].id}</Card.Title>
         <Card.Title>{product[0].name}</Card.Title>
         <Card.Text>
           {product[0].description}

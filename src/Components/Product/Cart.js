@@ -4,14 +4,15 @@ import Card from 'react-bootstrap/Card';
 import { removeFromCart } from '../../Redux/Actions';
 import { useNavigate } from 'react-router-dom';
 function Cart() {
-  const cart = useSelector((state) => state.cartItems);
-    const cartItems= cart.cartItems;
-    debugger;
+  const cartItems = useSelector((state) => state.cartItems.cartItems);
+  debugger;
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
 
     const handleRemoveFromCart = (itemId) => {
+      debugger;
+      console.log(itemId)
       dispatch(removeFromCart(itemId));
     };
     const handleNavigateToServices = () => {
@@ -29,7 +30,7 @@ function Cart() {
     <p className="card-text">Price: ${parseInt(item.price.split('$')[1]) * item.quantity}</p>
     <p className="card-text">Quantity: {item.quantity}</p>
     <div>
-      <button type="button" onClick={() => handleRemoveFromCart(item.id)}>Remove</button>
+      <button type="button" onClick={() => handleRemoveFromCart(item.product)}>Remove</button>
     </div>
   </div>
 </div>

@@ -20,12 +20,17 @@ function Navigate() {
         </li>
         <li className="nav-item">
         <Nav.Link>
-          <NavLink className="nav-link" to="/list">ProductDetails</NavLink>
+          <NavLink className="nav-link" to="/list"></NavLink>
           </Nav.Link>
         </li>
         <li className="nav-item">
         <Nav.Link>
           <NavLink className="nav-link" to="/services">Services</NavLink>
+       </Nav.Link>
+        </li>
+        <li className="nav-item">
+       <Nav.Link>
+        <NavLink className='nav-link' to='/products'>ProductList</NavLink>
        </Nav.Link>
         </li>
       </ul>
